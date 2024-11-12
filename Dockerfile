@@ -1,8 +1,13 @@
-FROM ubuntu:latest
+FROM python:3.12
 
-# Instala dependencias para cada lenguaje
+# Añadir repositorio de OpenJDK y luego instalar dependencias
 RUN apt-get update && \
-    apt-get install -y python3 nodejs ruby go openjdk-11-jdk && \
+    apt-get install -y \
+    curl \
+    nodejs \
+    ruby \
+    php-cli && \
+    apt-get install -y openjdk-11-jdk -t bullseye-backports && \
     apt-get clean
 
 # Configura el directorio de trabajo
@@ -13,10 +18,10 @@ COPY languages/ /app/languages/
 COPY flask-app/ /app/
 
 # Instala Flask
-RUN python3 -m pip install flask
+RUN pip install flask
 
 # Expone el puerto de la aplicación Flask
 EXPOSE 5000
 
 # Comando para iniciar la aplicación Flask
-CMD ["python3", "app.py"]
+CMD ["python", "app.py"]

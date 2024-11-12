@@ -17,7 +17,7 @@ def home():
         "JavaScript": run_code("JavaScript", "node /app/languages/main.js"),
         "Java": run_code("Java", "javac /app/languages/Main.java && java -cp /app/languages Main"),
         "Ruby": run_code("Ruby", "ruby /app/languages/main.rb"),
-        "Go": run_code("Go", "go run /app/languages/main.go")
+        "Php": run_code("Go", "go run /app/languages/main.php")
     }
     return render_template('index.html', results=results)
 
